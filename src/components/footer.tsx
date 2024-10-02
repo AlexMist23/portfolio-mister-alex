@@ -16,21 +16,21 @@ export default function Footer() {
           </a>
         </div>
         <div className="flex w-full gap-4 items-center mr-auto border-t-2 border-muted/50 pt-4">
-          <AMLogo className="h-5 text-foreground" />
+          <AMLogo className="w-5 h-5 text-foreground" />
           <p>© {new Date().getFullYear()} Aleksander Misterkiewicz</p>
           <a
             href="https://github.com/AlexMist23"
             className="flex items-center gap-1 hover:text-foreground/80"
           >
             <GitHubLogoIcon />
-            <p>linkedin.com/in/aleksandermst</p>
+            <p className="hidden sm:block">linkedin.com/in/aleksandermst</p>
           </a>
           <a
             href="https://www.linkedin.com/in/aleksandermst/"
             className="flex items-center gap-1 hover:text-foreground/80"
           >
             <LinkedInLogoIcon />
-            <p>github.com/AlexMist23</p>
+            <p className="hidden sm:block">github.com/AlexMist23</p>
           </a>
         </div>
       </div>
