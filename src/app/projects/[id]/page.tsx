@@ -1,73 +1,79 @@
 import { notFound } from "next/navigation";
-import { Button } from "@/components/ui/button";
+import Image from "next/image";
+import { headers } from "next/headers";
 import {
   Card,
   CardContent,
   CardDescription,
-  CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import Link from "next/link";
-import { Github } from "lucide-react";
+import { Button } from "@/components/ui/button";
 
-interface Project {
-  id: string;
-  title: string;
-  description: string;
-  repoUrl: string;
-  longDescription: string;
-  technologies: string[];
+async function getRepository(id: string) {
+  const headersList = headers();
+  const host = headersList.get("host") || "localhost:3000";
+  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
+
+  const url = `${protocol}://${host}/api/github-repositories?id=${id}`;
+  console.log("Fetching from URL:", url); // Debug log
+
+  const res = await fetch(url, { cache: "no-store" });
+  if (!res.ok) {
+    console.error("Error response:", res.status, res.statusText); // Debug log
+    return null;
+  }
+  return res.json();
 }
 
-const projects: Project[] = [
-  {
-    id: "1",
-    title: "Project 1",
-    description: "A brief description of Project 1",
-    repoUrl: "https://github.com/yourusername/project1",
-    longDescription:
-      "A more detailed description of Project 1, including its features, challenges, and outcomes.",
-    technologies: ["React", "Node.js", "MongoDB"],
-  },
-  // Add more projects as needed
-];
+export default async function ProjectPage({
+  params,
+}: {
+  params: { id: string };
+}) {
+  const repo = await getRepository(params.id);
 
-export default function ProjectPage({ params }: { params: { id: string } }) {
-  const project = projects.find((p) => p.id === params.id);
-
-  if (!project) {
+  if (!repo) {
     notFound();
   }
 
   return (
-    <div className="xl:container mx-auto px-4 py-8">
+    <div className="container mx-auto p-4">
       <Card>
         <CardHeader>
-          <CardTitle>{project.title}</CardTitle>
-          <CardDescription>{project.description}</CardDescription>
+          <CardTitle>{repo.name}</CardTitle>
+          <CardDescription>{repo.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <p className="mb-4">{project.longDescription}</p>
-          <h3 className="text-lg font-semibold mb-2">Technologies Used:</h3>
-          <ul className="list-disc list-inside">
-            {project.technologies.map((tech, index) => (
-              <li key={index}>{tech}</li>
-            ))}
-          </ul>
-        </CardContent>
-        <CardFooter>
-          <Link
-            href={project.repoUrl}
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Button>
-              <Github className="mr-2 h-4 w-4" />
-              View on GitHub
+          <div className="aspect-video relative mb-4">
+            <Image
+              src={`/images/repos/${repo.image}`}
+              alt={repo.name}
+              layout="fill"
+              objectFit="cover"
+              className="rounded-md"
+            />
+          </div>
+          <p className="mb-4">{repo.longDescription}</p>
+          <div className="flex space-x-4">
+            <Button asChild>
+              <a href={repo.url} target="_blank" rel="noopener noreferrer">
+                View on GitHub
+              </a>
             </Button>
-          </Link>
-        </CardFooter>
+            {repo.demoUrl && (
+              <Button asChild variant="outline">
+                <a
+                  href={repo.demoUrl}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Live Demo
+                </a>
+              </Button>
+            )}
+          </div>
+        </CardContent>
       </Card>
     </div>
   );

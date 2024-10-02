@@ -31,7 +31,7 @@ export default function Header() {
     <>
       <header
         className={cn(
-          "fixed w-full bg-background/80 backdrop-blur border-b shadow-sm"
+          "z-10 fixed w-full bg-background/80 backdrop-blur border-b shadow-sm"
         )}
       >
         <div className="flex xl:container h-16 px-4  mx-auto items-center text-sm gap-4">

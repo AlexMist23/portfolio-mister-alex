@@ -1,0 +1,12 @@
+{
+  "repo-name-1": {
+    "image": "repo1.jpg",
+    "longDescription": "This is a longer description for repo 1...",
+    "demoUrl": "https://demo.repo1.com"
+  },
+  "repo-name-2": {
+    "image": "repo2.jpg",
+    "longDescription": "This is a longer description for repo 2...",
+    "demoUrl": "https://demo.repo2.com"
+  }
+}
