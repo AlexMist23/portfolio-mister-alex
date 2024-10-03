@@ -1,12 +1,20 @@
 {
-  "repo-name-1": {
-    "image": "repo1.jpg",
-    "longDescription": "This is a longer description for repo 1...",
-    "demoUrl": "https://demo.repo1.com"
+  "portfolio-mister-alex": {
+    "images": ["portfolio-mister-alex.png"],
+    "longDescription": "A longer description of the repository.",
+    "demoUrl": "https://demo.example.com",
+    "technologies": ["TypeScript", "Next.js", "React"]
   },
-  "repo-name-2": {
-    "image": "repo2.jpg",
-    "longDescription": "This is a longer description for repo 2...",
-    "demoUrl": "https://demo.repo2.com"
+  "ckziu-plan": {
+    "images": ["ckziu-plan.png"],
+    "longDescription": "A longer description of the repository.",
+    "demoUrl": "https://ckziu-plan.vercel.app",
+    "technologies": ["TypeScript", "Next.js", "React"]
+  },
+  "weather-app": {
+    "images": ["weather-app.png"],
+    "longDescription": "A longer description of the repository.",
+    "demoUrl": "https://weather-appx.vercel.app/",
+    "technologies": ["TypeScript", "Next.js", "React"]
   }
 }

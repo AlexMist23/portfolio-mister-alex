@@ -47,7 +47,7 @@ export default async function ProjectPage({
         <CardContent>
           <div className="relative mb-4 aspect-video">
             <Image
-              src={`/images/repos/${repo.image}`}
+              src={`/images/repos/${repo.images[0]}`}
               alt={repo.name}
               layout="fill"
               objectFit="cover"

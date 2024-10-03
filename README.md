@@ -1,36 +1,73 @@
-# Porfolio
+# Aleksander Misterkiewicz Portfolio
 
-## Getting Started
+Welcome to my personal portfolio repository! This project showcases my skills, projects, and experience as a Full-stack Developer.
 
-First, run the development server:
+## 🚀 Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
-```
+- Responsive design for optimal viewing on all devices
+- Dynamic project listing fetched from GitHub API
+- Detailed project pages with extended information
+- Skills and technologies section
+- Animated UI elements for enhanced user experience
+- Dark mode support
+- SEO optimized
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## 🛠 Tech Stack
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+- [Next.js 14](https://nextjs.org/) - React framework for production
+- [React](https://reactjs.org/) - JavaScript library for building user interfaces
+- [TypeScript](https://www.typescriptlang.org/) - Typed superset of JavaScript
+- [Tailwind CSS](https://tailwindcss.com/) - Utility-first CSS framework
+- [shadcn/ui](https://ui.shadcn.com/) - Re-usable components built with Radix UI and Tailwind CSS
+- [Framer Motion](https://www.framer.com/motion/) - Animation library for React
+- [Octokit](https://github.com/octokit/rest.js/) - GitHub REST API client for JavaScript
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 📦 Installation
 
-## Learn More
+1. Clone the repository:
 
-To learn more about Next.js, take a look at the following resources:
+   ```
+   git clone https://github.com/AlexMist23/portfolio.git
+   cd portfolio
+   ```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+2. Install the dependencies:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+   ```
+   npm install
+   ```
 
-## Deploy on Vercel
+   or if you're using yarn:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+   ```
+   yarn install
+   ```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+3. Create a `.env.local` file in the root directory and add your GitHub token:
+
+   ```
+   GITHUB_TOKEN=your_github_token_here
+   NEXT_PUBLIC_API_URL=http://localhost:3000
+   ```
+
+4. Start the development server:
+
+   ```
+   npm run dev
+   ```
+
+   or with yarn:
+
+   ```
+   yarn dev
+   ```
+
+5. Open [http://localhost:3000](http://localhost:3000) in your browser to see the result.
+
+## 📁 Project Structure
+
+- `app/` - Next.js app directory containing pages and API routes
+- `components/` - Reusable React components
+- `data/` - JSON and Markdown files for additional project data
+- `public/` - Static assets including images
+- `styles/` - Global styles and Tailwind CSS configuration

@@ -3,21 +3,38 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
-interface Repository {
-  image: string;
+type OctokitRepo = Awaited<
+  ReturnType<Octokit["repos"]["listForAuthenticatedUser"]>
+>["data"][number];
+type GitHubRepository = OctokitRepo;
+
+interface LocalRepository {
+  images: string[];
   longDescription: string;
   demoUrl: string;
+  technologies: string[];
 }
 
 interface LocalData {
-  [key: string]: Repository;
+  [key: string]: LocalRepository;
 }
 
+interface MergedRepository {
+  id: number;
+  name: string;
+  description: string | null;
+  url: string;
+  images: string[];
+  longDescription: string;
+  demoUrl: string;
+  technologies: string[];
+  createdAt: string | null;
+}
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
-const dataFilePath = path.join(process.cwd(), "data", "repo-data.json");
+const dataFilePath = path.join(process.cwd(), "src", "data", "repo-data.json");
 let localData: LocalData;
 try {
   localData = JSON.parse(fs.readFileSync(dataFilePath, "utf8"));
@@ -25,12 +42,25 @@ try {
   console.error("Error loading local data:", error);
   localData = {};
 }
-
+function mergeRepoData(
+  ghRepo: GitHubRepository,
+  localRepoData: LocalRepository | undefined
+): MergedRepository {
+  return {
+    id: ghRepo.id,
+    name: ghRepo.name,
+    description: ghRepo.description,
+    url: ghRepo.html_url,
+    images: localRepoData?.images || ["default.jpg"],
+    longDescription: localRepoData?.longDescription || ghRepo.description || "",
+    demoUrl: localRepoData?.demoUrl || "",
+    technologies: localRepoData?.technologies || [],
+    createdAt: ghRepo.created_at,
+  };
+}
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  console.log("Received request with id:", id);
-  console.log("GITHUB_TOKEN is set:", !!process.env.GITHUB_TOKEN);
 
   try {
     if (!process.env.GITHUB_TOKEN) {
@@ -38,9 +68,9 @@ export async function GET(request: Request) {
     }
 
     if (id) {
-      console.log("Fetching single repository with id:", id);
       const response = await octokit.repos.listForAuthenticatedUser({
-        sort: "updated",
+        sort: "created",
+        direction: "desc",
         per_page: 100,
       });
 
@@ -54,44 +84,25 @@ export async function GET(request: Request) {
         );
       }
 
-      const localRepoData = localData[ghRepo.name] || {};
+      const localRepoData = localData[ghRepo.name];
+      const repo = mergeRepoData(ghRepo, localRepoData);
 
-      const repo = {
-        id: ghRepo.id,
-        name: ghRepo.name,
-        description: ghRepo.description,
-        url: ghRepo.html_url,
-        image: localRepoData.image || "default.jpg",
-        longDescription: localRepoData.longDescription,
-        demoUrl: localRepoData.demoUrl,
-      };
-
-      console.log("Returning single repository:", repo.name);
       return NextResponse.json(repo);
     } else {
-      console.log("Fetching list of repositories");
       const response = await octokit.repos.listForAuthenticatedUser({
-        sort: "updated",
-        per_page: 10,
+        sort: "created",
+        direction: "desc",
+        per_page: 100,
       });
 
-      const repositories = response.data.map((ghRepo) => {
-        const localRepoData = localData[ghRepo.name] || {};
-        return {
-          id: ghRepo.id,
-          name: ghRepo.name,
-          description: ghRepo.description,
-          url: ghRepo.html_url,
-          image: localRepoData.image || "default.jpg",
-          longDescription: localRepoData.longDescription,
-          demoUrl: localRepoData.demoUrl,
-        };
-      });
+      const repositories = response.data
+        .filter((repo) => repo.name !== "AlexMist23")
+        .slice(0, 10)
+        .map((ghRepo) => {
+          const localRepoData = localData[ghRepo.name];
+          return mergeRepoData(ghRepo, localRepoData);
+        });
 
-      console.log(
-        "Returning list of repositories, count:",
-        repositories.length
-      );
       return NextResponse.json(repositories);
     }
   } catch (error) {
