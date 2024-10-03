@@ -18,7 +18,6 @@ import { Badge } from "@/components/ui/badge";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
   GitHubLogoIcon,
-  LinkedInLogoIcon,
   ExternalLinkIcon,
   CodeIcon,
   CalendarIcon,
@@ -42,23 +41,18 @@ interface Repository {
   demoUrl?: string;
   createdAt: string;
 }
-
-const skills = [
-  "React",
-  "Next.js",
-  "TypeScript",
-  "Node.js",
-  "Express",
-  "MongoDB",
-  "PostgreSQL",
-  "GraphQL",
-  "REST APIs",
-  "AWS",
-  "Docker",
-  "CI/CD",
-  "Jest",
-  "React Testing Library",
-];
+interface SkillsAndTechnologies {
+  languages: string[];
+  frameworks: string[];
+  tools: string[];
+  databases: string[];
+}
+const skillsAndTechnologies: SkillsAndTechnologies = {
+  languages: ["TypeScript", "JavaScript", "Python", "SQL"],
+  frameworks: ["React", "Node.js", "Next.js", "Django", "Flask"],
+  tools: ["Git", "ESLint", "Responsive Design"],
+  databases: ["PostgreSQL"],
+};
 
 function RepositoriesList() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
@@ -263,7 +257,6 @@ export default function ProjectsPage() {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <LinkedInLogoIcon className="mr-2" />
                   LinkedIn Profile
                 </a>
               </Button>
@@ -279,27 +272,37 @@ export default function ProjectsPage() {
         </motion.div>
       </section>
 
+      {/* Skills and Technologies Section */}
       <section className="mb-16">
         <h2 className="mb-6 text-3xl font-bold">Skills & Technologies</h2>
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          className="flex flex-wrap gap-2"
-        >
-          {skills.map((skill, index) => (
-            <motion.div
-              key={skill}
-              initial={{ opacity: 0, scale: 0.8 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.3, delay: index * 0.05 }}
-            >
-              <Badge variant="outline" className="px-3 py-1 text-sm">
-                {skill}
-              </Badge>
-            </motion.div>
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {Object.entries(skillsAndTechnologies).map(([category, items]) => (
+            <div key={category}>
+              <h3 className="mb-2 text-xl font-semibold capitalize">
+                {category}
+              </h3>
+              <motion.div
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="flex flex-wrap gap-2"
+              >
+                {items.map((item: string, index: number) => (
+                  <motion.div
+                    key={item}
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ duration: 0.3, delay: index * 0.05 }}
+                  >
+                    <Badge variant="outline" className="px-3 py-1 text-sm">
+                      {item}
+                    </Badge>
+                  </motion.div>
+                ))}
+              </motion.div>
+            </div>
           ))}
-        </motion.div>
+        </div>
       </section>
 
       <section>
