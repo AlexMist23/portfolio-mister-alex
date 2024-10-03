@@ -59,7 +59,7 @@ function RepositoriesList() {
 
   useEffect(() => {
     async function fetchRepositories() {
-      const response = await fetch("/api/github-repositories");
+      const response = await fetch("/api/github/repository-list");
       if (!response.ok) {
         const errorData = await response.json();
         throw new Error(errorData.error || "Failed to fetch repositories");
@@ -218,21 +218,23 @@ function ErrorFallback({
 
 export default function ProjectsPage() {
   return (
-    <div className="p-0 mx-auto sm:p-8 xl:container">
-      <section className="p-8 mb-16 sm:p-0">
+    <div className="flex flex-col p-0 mx-auto sm:p-8 xl:container">
+      <section className="p-8 mx-auto md:mb-16 sm:p-0">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
-          className="flex flex-col items-center mb-8 md:flex-row md:items-start"
+          className="flex flex-col md:flex-row gap-6 items-center"
         >
-          <Avatar className="w-32 h-32 mb-4 shadow-md md:w-48 md:h-48 md:mb-0 md:mr-8 shadow-muted">
-            <AvatarImage
-              src="/images/am-main-img.webp"
-              alt="Aleksander Misterkiewicz"
-            />
-            <AvatarFallback>AM</AvatarFallback>
-          </Avatar>
+          <div>
+            <Avatar className=" w-60 h-60 shadow-md md:mb-0 md:mr-8 shadow-muted ">
+              <AvatarImage
+                src="/images/am-main-img.webp"
+                alt="Aleksander Misterkiewicz"
+              />
+              <AvatarFallback>AM</AvatarFallback>
+            </Avatar>
+          </div>
           <div>
             <h1 className="mb-2 text-4xl font-bold text-transparent bg-gradient-to-r from-foreground to-foreground/40 bg-clip-text">
               Aleksander Misterkiewicz

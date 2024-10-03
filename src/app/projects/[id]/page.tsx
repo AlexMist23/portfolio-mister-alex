@@ -1,6 +1,8 @@
+"use client";
+
 import { notFound } from "next/navigation";
+import { useEffect, useState } from "react";
 import Image from "next/image";
-import { headers } from "next/headers";
 import {
   Card,
   CardContent,
@@ -16,29 +18,72 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { AspectRatio } from "@/components/ui/aspect-ratio"; // Make sure to import AspectRatio
+import { AspectRatio } from "@/components/ui/aspect-ratio";
+import ReactMarkdown from "react-markdown"; // Import the Markdown renderer
+import Markdown from "react-markdown";
+import MarkdownRenderer from "@/components/markdown-renderer";
+
+interface Repository {
+  id: number;
+  name: string;
+  description: string | null;
+  longDescription: string;
+  url: string;
+  images: string[];
+  demoUrl: string;
+  readmeContent: string; // Add readmeContent to the type
+}
 
 async function getRepository(id: string) {
-  const headersList = headers();
-  const host = headersList.get("host") || "localhost:3000";
-  const protocol = process.env.NODE_ENV === "production" ? "https" : "http";
-
-  const url = `${protocol}://${host}/api/github-repositories?id=${id}`;
+  const url = `/api/github/repository?id=${id}`;
 
   const res = await fetch(url, { cache: "no-store" });
+
   if (!res.ok) {
-    console.error("Error response:", res.status, res.statusText); // Debug log
+    console.error("Error response:", res.status, res.statusText);
     return null;
   }
+
   return res.json();
 }
 
-export default async function ProjectPage({
-  params,
-}: {
-  params: { id: string };
-}) {
-  const repo = await getRepository(params.id);
+async function getReadme(owner: string, repo: string) {
+  const url = `/api/github/repo-readme?owner=${owner}&repo=${repo}`;
+
+  const res = await fetch(url, { cache: "no-store" });
+
+  if (!res.ok) {
+    console.error("Error fetching README:", res.status, res.statusText);
+    return null;
+  }
+
+  return res.json();
+}
+
+export default function ProjectPage({ params }: { params: { id: string } }) {
+  const [repo, setRepo] = useState<Repository | null>(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const repository = await getRepository(params.id);
+      if (!repository) {
+        notFound();
+      } else {
+        const readme = await getReadme("AlexMist23", repository.name); // Replace with actual owner name
+        console.log(readme);
+        repository.readmeContent = readme?.content || ""; // Assign the readme content
+        setRepo(repository);
+      }
+      setLoading(false);
+    };
+
+    fetchData();
+  }, [params.id]);
+
+  if (loading) {
+    return <div>Loading...</div>;
+  }
 
   if (!repo) {
     notFound();
@@ -51,7 +96,7 @@ export default async function ProjectPage({
           <CardTitle className="text-3xl font-bold text-primary">
             {repo.name}
           </CardTitle>
-          <CardDescription className="text-base text-muted">
+          <CardDescription className="text-base text-muted-foreground">
             {repo.description}
           </CardDescription>
         </CardHeader>
@@ -76,9 +121,6 @@ export default async function ProjectPage({
             <CarouselPrevious className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md left-4 top-1/2 bg-background hover:bg-primary" />
             <CarouselNext className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md right-4 top-1/2 bg-background hover:bg-primary" />
           </Carousel>
-          <p className="mt-4 text-lg leading-relaxed text-foreground">
-            {repo.longDescription}
-          </p>
           <div className="flex mt-4 space-x-4">
             <Button asChild className="bg-primary">
               <a href={repo.url} target="_blank" rel="noopener noreferrer">
@@ -97,6 +139,10 @@ export default async function ProjectPage({
               </Button>
             )}
           </div>
+          <p className="mt-4 text-lg leading-relaxed text-foreground">
+            {repo.longDescription}
+          </p>
+          <MarkdownRenderer markdown={repo.readmeContent} />
         </CardContent>
       </Card>
     </div>
