@@ -19,8 +19,6 @@ import {
   CarouselPrevious,
 } from "@/components/ui/carousel";
 import { AspectRatio } from "@/components/ui/aspect-ratio";
-import ReactMarkdown from "react-markdown"; // Import the Markdown renderer
-import Markdown from "react-markdown";
 import MarkdownRenderer from "@/components/markdown-renderer";
 
 interface Repository {
