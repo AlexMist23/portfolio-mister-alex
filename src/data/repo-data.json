@@ -1,20 +1,40 @@
 {
   "portfolio-mister-alex": {
-    "images": ["portfolio-mister-alex.webp"],
-    "longDescription": "A longer description of the repository.",
-    "demoUrl": "https://demo.example.com",
-    "technologies": ["TypeScript", "Next.js", "React"]
+    "images": ["portfolio-mister-alex-1.webp", "portfolio-mister-alex-2.webp"],
+    "demoUrl": "https://misterkiewicz-aleksander.vercel.app",
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "REST API"
+    ]
   },
   "ckziu-plan": {
     "images": ["ckziu-plan.webp"],
-    "longDescription": "A longer description of the repository.",
     "demoUrl": "https://ckziu-plan.vercel.app",
-    "technologies": ["TypeScript", "Next.js", "React"]
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "REST API",
+      "Tailwind CSS"
+    ]
   },
   "weather-app": {
     "images": ["weather-app.webp"],
-    "longDescription": "A longer description of the repository.",
     "demoUrl": "https://weather-appx.vercel.app/",
-    "technologies": ["TypeScript", "Next.js", "React"]
+    "technologies": ["TypeScript", "Next.js", "React", "Shadcn UI", "REST API"]
+  },
+  "django_cinema_app": {
+    "technologies": [
+      "Python",
+      "Django",
+      "SQL",
+      "PostgreSQL",
+      "HTML",
+      "CSS",
+      "JavaScript"
+    ]
   }
 }
