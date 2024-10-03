@@ -1,6 +1,10 @@
 {
   "portfolio-mister-alex": {
-    "images": ["portfolio-mister-alex-1.webp", "portfolio-mister-alex-2.webp"],
+    "images": [
+      "portfolio-mister-alex-1.webp",
+      "portfolio-mister-alex-2.webp",
+      "portfolio-mister-alex-3.webp"
+    ],
     "demoUrl": "https://misterkiewicz-aleksander.vercel.app",
     "technologies": [
       "TypeScript",
@@ -11,7 +15,7 @@
     ]
   },
   "ckziu-plan": {
-    "images": ["ckziu-plan.webp"],
+    "images": ["ckziu-plan-1.webp", "ckziu-plan-2.webp"],
     "demoUrl": "https://ckziu-plan.vercel.app",
     "technologies": [
       "TypeScript",
