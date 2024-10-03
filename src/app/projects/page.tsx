@@ -218,8 +218,8 @@ function ErrorFallback({
 
 export default function ProjectsPage() {
   return (
-    <div className="p-8 mx-auto xl:container">
-      <section className="mb-16">
+    <div className="p-0 mx-auto sm:p-8 xl:container">
+      <section className="p-8 mb-16 sm:p-0">
         <motion.div
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
@@ -273,7 +273,7 @@ export default function ProjectsPage() {
       </section>
 
       {/* Skills and Technologies Section */}
-      <section className="mb-16">
+      <section className="p-8 mb-16 sm:p-0">
         <h2 className="mb-6 text-3xl font-bold">Skills & Technologies</h2>
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
           {Object.entries(skillsAndTechnologies).map(([category, items]) => (
@@ -306,7 +306,9 @@ export default function ProjectsPage() {
       </section>
 
       <section>
-        <h2 className="mb-6 text-3xl font-bold">Featured Projects</h2>
+        <h2 className="p-8 mb-6 text-3xl font-bold sm:p-0">
+          Featured Projects
+        </h2>
         <ErrorBoundary
           FallbackComponent={ErrorFallback}
           onReset={() => window.location.reload()}
