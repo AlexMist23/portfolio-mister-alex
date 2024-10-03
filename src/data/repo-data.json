@@ -1,18 +1,18 @@
 {
   "portfolio-mister-alex": {
-    "images": ["portfolio-mister-alex.png"],
+    "images": ["portfolio-mister-alex.webp"],
     "longDescription": "A longer description of the repository.",
     "demoUrl": "https://demo.example.com",
     "technologies": ["TypeScript", "Next.js", "React"]
   },
   "ckziu-plan": {
-    "images": ["ckziu-plan.png"],
+    "images": ["ckziu-plan.webp"],
     "longDescription": "A longer description of the repository.",
     "demoUrl": "https://ckziu-plan.vercel.app",
     "technologies": ["TypeScript", "Next.js", "React"]
   },
   "weather-app": {
-    "images": ["weather-app.png"],
+    "images": ["weather-app.webp"],
     "longDescription": "A longer description of the repository.",
     "demoUrl": "https://weather-appx.vercel.app/",
     "technologies": ["TypeScript", "Next.js", "React"]

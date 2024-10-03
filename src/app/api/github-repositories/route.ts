@@ -51,7 +51,7 @@ function mergeRepoData(
     name: ghRepo.name,
     description: ghRepo.description,
     url: ghRepo.html_url,
-    images: localRepoData?.images || ["default.jpg"],
+    images: localRepoData?.images || ["default.webp"],
     longDescription: localRepoData?.longDescription || ghRepo.description || "",
     demoUrl: localRepoData?.demoUrl || "",
     technologies: localRepoData?.technologies || [],
