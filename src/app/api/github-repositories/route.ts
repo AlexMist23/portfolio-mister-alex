@@ -29,11 +29,16 @@ try {
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
   const id = searchParams.get("id");
-  console.log("Received request with id:", id); // Debug log
+  console.log("Received request with id:", id);
+  console.log("GITHUB_TOKEN is set:", !!process.env.GITHUB_TOKEN);
 
   try {
+    if (!process.env.GITHUB_TOKEN) {
+      throw new Error("GITHUB_TOKEN is not set");
+    }
+
     if (id) {
-      console.log("Fetching single repository with id:", id); // Debug log
+      console.log("Fetching single repository with id:", id);
       const response = await octokit.repos.listForAuthenticatedUser({
         sort: "updated",
         per_page: 100,
@@ -42,7 +47,7 @@ export async function GET(request: Request) {
       const ghRepo = response.data.find((repo) => repo.id.toString() === id);
 
       if (!ghRepo) {
-        console.log("Repository not found for id:", id); // Debug log
+        console.log("Repository not found for id:", id);
         return NextResponse.json(
           { error: "Repository not found" },
           { status: 404 }
@@ -61,10 +66,10 @@ export async function GET(request: Request) {
         demoUrl: localRepoData.demoUrl,
       };
 
-      console.log("Returning single repository:", repo.name); // Debug log
+      console.log("Returning single repository:", repo.name);
       return NextResponse.json(repo);
     } else {
-      console.log("Fetching list of repositories"); // Debug log
+      console.log("Fetching list of repositories");
       const response = await octokit.repos.listForAuthenticatedUser({
         sort: "updated",
         per_page: 10,
@@ -86,13 +91,16 @@ export async function GET(request: Request) {
       console.log(
         "Returning list of repositories, count:",
         repositories.length
-      ); // Debug log
+      );
       return NextResponse.json(repositories);
     }
   } catch (error) {
     console.error("Error fetching repositories:", error);
     return NextResponse.json(
-      { error: "Failed to fetch repositories" },
+      {
+        error: "Failed to fetch repositories",
+        details: (error as Error).message,
+      },
       { status: 500 }
     );
   }

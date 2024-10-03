@@ -31,13 +31,14 @@ export default function PortfolioLanding() {
       try {
         const response = await fetch("/api/github-repositories");
         if (!response.ok) {
-          throw new Error("Failed to fetch repositories");
+          const errorData = await response.json();
+          throw new Error(errorData.error || "Failed to fetch repositories");
         }
         const data = await response.json();
         setRepositories(data);
         setIsLoading(false);
       } catch (err) {
-        setError(`Error fetching repositories ${err}`);
+        setError(`Error fetching repositories: ${(err as Error).message}`);
         setIsLoading(false);
       }
     }
