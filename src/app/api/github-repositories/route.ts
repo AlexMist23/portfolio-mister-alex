@@ -9,10 +9,10 @@ type OctokitRepo = Awaited<
 type GitHubRepository = OctokitRepo;
 
 interface LocalRepository {
-  images: string[];
-  longDescription: string;
-  demoUrl: string;
-  technologies: string[];
+  images?: string[];
+  longDescription?: string;
+  demoUrl?: string;
+  technologies?: string[];
 }
 
 interface LocalData {
@@ -25,7 +25,6 @@ interface MergedRepository {
   description: string | null;
   url: string;
   images: string[];
-  longDescription: string;
   demoUrl: string;
   technologies: string[];
   createdAt: string | null;
@@ -52,7 +51,6 @@ function mergeRepoData(
     description: ghRepo.description,
     url: ghRepo.html_url,
     images: localRepoData?.images || ["default.webp"],
-    longDescription: localRepoData?.longDescription || ghRepo.description || "",
     demoUrl: localRepoData?.demoUrl || "",
     technologies: localRepoData?.technologies || [],
     createdAt: ghRepo.created_at,
