@@ -6,7 +6,7 @@ export default function Footer() {
     <footer className="p-6 mt-auto border-t-2 border-muted">
       <div className="flex flex-col items-center gap-4 mx-auto text-sm xl:container text-foreground/50">
         <div className="flex items-center gap-4">
-          <p>Project: Aleksander Misterkiewicz Portfolio</p>
+          <p>{process.env.PROJECT_NAME}</p>
           <a
             href="https://github.com/AlexMist23/portfolio-mister-alex"
             className="flex items-center gap-1 hover:text-foreground/80"
