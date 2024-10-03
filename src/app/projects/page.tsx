@@ -23,6 +23,14 @@ import {
   CodeIcon,
   CalendarIcon,
 } from "@radix-ui/react-icons";
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 interface Repository {
   id: number;
@@ -64,7 +72,6 @@ function RepositoriesList() {
       }
       const data = await response.json();
       setRepositories(data);
-      console.log(data);
     }
     fetchRepositories();
   }, []);
@@ -80,15 +87,32 @@ function RepositoriesList() {
         >
           <Card className="overflow-hidden transition-shadow duration-300 group hover:shadow-lg">
             <div className="md:flex">
-              <div className="relative h-48 md:h-auto md:w-1/3">
-                <Image
-                  src={`/images/repos/${repo.images[0]}`}
-                  alt={repo.name}
-                  layout="fill"
-                  objectFit="cover"
-                  className="transition-transform duration-300 border-r-2 group-hover:scale-105 borderr-muted"
-                />
+              <div className="relative h-72 md:h-auto md:w-1/3">
+                {/* Carousel for the repository images */}
+                <Carousel className="relative h-full">
+                  <AspectRatio ratio={16 / 9} className="w-full h-full">
+                    <CarouselContent>
+                      {repo.images.map((img: string, i: number) => (
+                        <CarouselItem key={i}>
+                          <AspectRatio ratio={16 / 9} className="w-full h-full">
+                            <Image
+                              src={`/images/repos/${img}`}
+                              alt={repo.name}
+                              layout="fill"
+                              objectFit="cover"
+                              className="transition-transform duration-300 ease-in-out transform hover:scale-105"
+                              priority
+                            />
+                          </AspectRatio>
+                        </CarouselItem>
+                      ))}
+                    </CarouselContent>
+                  </AspectRatio>
+                  <CarouselPrevious className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md left-4 top-1/2 bg-background" />
+                  <CarouselNext className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md right-4 top-1/2 bg-background" />
+                </Carousel>
               </div>
+
               <div className="flex flex-col justify-between p-6 md:w-2/3">
                 <div>
                   <CardHeader className="p-0 mb-4">
@@ -216,7 +240,7 @@ export default function ProjectsPage() {
             <AvatarFallback>AM</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="mb-2 text-4xl font-bold text-transparent bg-gradient-to-r from-foreground to-foreground/50 bg-clip-text">
+            <h1 className="mb-2 text-4xl font-bold text-transparent bg-gradient-to-r from-foreground to-foreground/40 bg-clip-text">
               Aleksander Misterkiewicz
             </h1>
             <p className="mb-4 text-xl text-muted-foreground">
@@ -246,10 +270,10 @@ export default function ProjectsPage() {
             </div>
             <p className="max-w-2xl text-lg leading-relaxed">
               Detail-oriented quality assurance tester transitioning to
-              front-end development. Skilled in software testing, development,
+              full-stack development. Skilled in software testing, development,
               and design with a focus on Python and JavaScript. Seeking
               opportunities to apply analytical problem-solving skills and
-              technical expertise in a junior front-end role.
+              technical expertise in a junior full-stack role.
             </p>
           </div>
         </motion.div>
