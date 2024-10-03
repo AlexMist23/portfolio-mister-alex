@@ -3,12 +3,22 @@ import { NextResponse } from "next/server";
 import fs from "fs";
 import path from "path";
 
+interface Repository {
+  image: string;
+  longDescription: string;
+  demoUrl: string;
+}
+
+interface LocalData {
+  [key: string]: Repository;
+}
+
 const octokit = new Octokit({
   auth: process.env.GITHUB_TOKEN,
 });
 
 const dataFilePath = path.join(process.cwd(), "data", "repo-data.json");
-let localData;
+let localData: LocalData;
 try {
   localData = JSON.parse(fs.readFileSync(dataFilePath, "utf8"));
 } catch (error) {
