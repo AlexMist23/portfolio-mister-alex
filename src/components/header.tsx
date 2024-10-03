@@ -34,7 +34,7 @@ export default function Header() {
           "z-10 fixed w-full bg-background/80 backdrop-blur border-b shadow-sm"
         )}
       >
-        <div className="flex xl:container h-16 px-4  mx-auto items-center text-sm gap-4">
+        <div className="flex items-center h-16 gap-4 px-4 mx-auto text-sm xl:container">
           <Link href={"/"} className="w-8">
             <AMLogo />
           </Link>
@@ -55,7 +55,7 @@ export default function Header() {
             ))}
           </nav>
           <div className="ml-auto">
-            <div className="hidden md:block ml-auto">
+            <div className="hidden ml-auto md:block">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="icon">

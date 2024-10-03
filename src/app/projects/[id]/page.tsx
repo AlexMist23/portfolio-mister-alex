@@ -38,14 +38,14 @@ export default async function ProjectPage({
   }
 
   return (
-    <div className="container mx-auto p-4">
+    <div className="container p-4 mx-auto">
       <Card>
         <CardHeader>
           <CardTitle>{repo.name}</CardTitle>
           <CardDescription>{repo.description}</CardDescription>
         </CardHeader>
         <CardContent>
-          <div className="aspect-video relative mb-4">
+          <div className="relative mb-4 aspect-video">
             <Image
               src={`/images/repos/${repo.image}`}
               alt={repo.name}

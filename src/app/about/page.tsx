@@ -2,8 +2,8 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default function About() {
   return (
-    <div className="xl:container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">About Me</h1>
+    <div className="px-4 py-8 mx-auto xl:container">
+      <h1 className="mb-8 text-4xl font-bold">About Me</h1>
       <Card>
         <CardHeader>
           <CardTitle>Misterkiewicz Aleksander</CardTitle>
@@ -14,7 +14,7 @@ export default function About() {
             Node.js, and TypeScript. I love building scalable web applications
             and solving complex problems.
           </p>
-          <h2 className="text-2xl font-semibold mb-2">Skills</h2>
+          <h2 className="mb-2 text-2xl font-semibold">Skills</h2>
           <ul className="list-disc list-inside">
             <li>JavaScript / TypeScript</li>
             <li>React / Next.js</li>

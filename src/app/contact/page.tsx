@@ -50,12 +50,12 @@ export default function Contact() {
   }
 
   return (
-    <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-bold mb-8">Contact Me</h1>
+    <div className="container px-4 py-8 mx-auto">
+      <h1 className="mb-8 text-4xl font-bold">Contact Me</h1>
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
-          className="space-y-8 max-w-md"
+          className="max-w-md space-y-8"
         >
           <FormField
             control={form.control}

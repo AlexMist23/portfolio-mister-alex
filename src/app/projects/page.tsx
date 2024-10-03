@@ -54,15 +54,15 @@ export default function PortfolioLanding() {
   }
 
   return (
-    <div className="container mx-auto p-4">
-      <div className="flex flex-col md:flex-row items-center mb-8">
-        <Avatar className="w-32 h-32 md:w-48 md:h-48 mb-4 md:mb-0 md:mr-8">
+    <div className="container p-4 mx-auto">
+      <div className="flex flex-col items-center mb-8 md:flex-row">
+        <Avatar className="w-32 h-32 mb-4 md:w-48 md:h-48 md:mb-0 md:mr-8">
           <AvatarImage src="/your-photo.jpg" alt="Aleksander Misterkiewicz" />
           <AvatarFallback>YN</AvatarFallback>
         </Avatar>
         <div>
-          <h1 className="text-3xl font-bold mb-2">Your Name</h1>
-          <p className="text-xl mb-4">
+          <h1 className="mb-2 text-3xl font-bold">Your Name</h1>
+          <p className="mb-4 text-xl">
             Full-stack Developer | Open Source Enthusiast
           </p>
           <Button asChild>
@@ -77,8 +77,8 @@ export default function PortfolioLanding() {
         </div>
       </div>
 
-      <h2 className="text-2xl font-bold mb-4">My Projects</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+      <h2 className="mb-4 text-2xl font-bold">My Projects</h2>
+      <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
         {repositories.map((repo) => (
           <Card key={repo.id} className="flex flex-col">
             <CardHeader>
@@ -88,7 +88,7 @@ export default function PortfolioLanding() {
               </CardDescription>
             </CardHeader>
             <CardContent className="flex-grow">
-              <div className="aspect-video relative mb-4">
+              <div className="relative mb-4 aspect-video">
                 <Image
                   src={`/images/repos/${repo.image}`}
                   alt={repo.name}

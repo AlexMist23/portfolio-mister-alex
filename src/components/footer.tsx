@@ -3,9 +3,9 @@ import AMLogo from "./icons/am-logo";
 
 export default function Footer() {
   return (
-    <footer className="mt-auto border-muted border-t-2 p-6">
-      <div className="flex flex-col gap-4 mx-auto xl:container items-center text-sm text-foreground/50">
-        <div className="flex gap-4 items-center mr-auto">
+    <footer className="p-6 mt-auto border-t-2 border-muted">
+      <div className="flex flex-col items-center gap-4 mx-auto text-sm xl:container text-foreground/50">
+        <div className="flex items-center gap-4 mr-auto">
           <p>Project: Aleksander Misterkiewicz Portfolio</p>
           <a
             href="https://github.com/AlexMist23/portfolio-mister-alex"
@@ -15,7 +15,7 @@ export default function Footer() {
             <p>Repository</p>
           </a>
         </div>
-        <div className="flex w-full gap-4 items-center mr-auto border-t-2 border-muted/50 pt-4">
+        <div className="flex items-center w-full gap-4 pt-4 mr-auto border-t-2 border-muted/50">
           <AMLogo className="w-5 h-5 text-foreground" />
           <p>© {new Date().getFullYear()} Aleksander Misterkiewicz</p>
           <a
