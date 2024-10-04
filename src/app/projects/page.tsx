@@ -29,7 +29,6 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
-import { AspectRatio } from "@radix-ui/react-aspect-ratio";
 
 interface Repository {
   id: number;
@@ -82,26 +81,21 @@ function RepositoriesList() {
           <Card className="overflow-hidden transition-shadow duration-300 group hover:shadow-lg">
             <div className="md:flex">
               <div className="relative h-72 md:h-auto md:w-1/3">
-                {/* Carousel for the repository images */}
-                <Carousel className="relative h-full">
-                  <AspectRatio ratio={16 / 9} className="w-full h-full">
-                    <CarouselContent>
-                      {repo.images.map((img: string, i: number) => (
-                        <CarouselItem key={i}>
-                          <AspectRatio ratio={16 / 9} className="w-full h-full">
-                            <Image
-                              src={`/images/repos/${img}`}
-                              alt={repo.name}
-                              layout="fill"
-                              objectFit="cover"
-                              className="transition-transform duration-300 ease-in-out transform hover:scale-105"
-                              priority
-                            />
-                          </AspectRatio>
-                        </CarouselItem>
-                      ))}
-                    </CarouselContent>
-                  </AspectRatio>
+                <Carousel opts={{ loop: true }} className="h-full">
+                  <CarouselContent className="h-full">
+                    {repo.images.map((img: string, i: number) => (
+                      <CarouselItem key={i} className="relative h-72 w-72">
+                        <Image
+                          src={`/images/repos/${img}`}
+                          alt={repo.name}
+                          layout="fill"
+                          objectFit="cover"
+                          className="transition-transform duration-300 ease-in-out transform hover:scale-105"
+                          priority
+                        />
+                      </CarouselItem>
+                    ))}
+                  </CarouselContent>
                   <CarouselPrevious className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md left-4 top-1/2 bg-background" />
                   <CarouselNext className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md right-4 top-1/2 bg-background" />
                 </Carousel>
@@ -308,7 +302,7 @@ export default function ProjectsPage() {
       </section>
 
       <section>
-        <h2 className="p-8 mb-6 text-3xl font-bold sm:p-0">
+        <h2 className="px-8 mb-6 text-3xl font-bold sm:p-0">
           Featured Projects
         </h2>
         <ErrorBoundary

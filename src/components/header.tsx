@@ -34,11 +34,11 @@ export default function Header() {
           "z-10 fixed w-full bg-background/80 backdrop-blur border-b shadow-sm"
         )}
       >
-        <div className="flex items-center h-16 gap-4 px-4 mx-auto text-sm xl:container">
+        <div className="flex items-center h-16 gap-8 px-4 mx-auto text-sm xl:container">
           <Link href={"/"} className="w-8">
             <AMLogo />
           </Link>
-          <nav className="flex gap-4">
+          <nav className="hidden gap-6 md:flex">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -124,7 +124,7 @@ export default function Header() {
                 </Link>
               ))}
             </div>
-            <div className="pt-4 pb-3 border-t border-gray-700">
+            <div className="pt-4 pb-3 border-t border-muted">
               <DropdownMenu>
                 <DropdownMenuTrigger asChild>
                   <Button variant="outline" size="icon" className="ml-2">
