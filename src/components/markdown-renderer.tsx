@@ -45,6 +45,15 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
           <strong className="font-bold">{children}</strong>
         ),
         em: ({ children }) => <em className="italic">{children}</em>,
+        a: ({ href, children }) => (
+          <a
+            href={href}
+            className="text-chart-2 underline hover:text-chart-2/70 "
+          >
+            {children}
+          </a>
+        ),
+
         code: ({
           inline,
           className,
@@ -56,7 +65,9 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         }) => {
           const match = /language-(\w+)/.exec(className || "");
           return inline ? (
-            <code className="bg-background rounded px-1">{children}</code>
+            <code className="bg-gray-100 text-red-500 px-1 rounded-sm inline-flex">
+              {children}
+            </code>
           ) : (
             <SyntaxHighlighter
               style={syntaxStyle}
