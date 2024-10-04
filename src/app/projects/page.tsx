@@ -78,7 +78,7 @@ function RepositoriesList() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <Card className="overflow-hidden transition-shadow duration-300 group hover:shadow-lg">
+          <Card className="overflow-hidden transition-shadow duration-300 group hover:shadow-lg hover:shadow-muted">
             <div className="md:flex">
               <div className="relative h-72 md:h-auto md:w-1/3">
                 <Carousel opts={{ loop: true }} className="h-full">

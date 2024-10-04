@@ -48,7 +48,7 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
         a: ({ href, children }) => (
           <a
             href={href}
-            className="text-chart-2 underline hover:text-chart-2/70 "
+            className="text-markdown-a underline hover:text-markdown-a/80 "
           >
             {children}
           </a>

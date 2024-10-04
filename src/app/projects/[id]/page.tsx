@@ -93,7 +93,7 @@ export default function ProjectPage({ params }: { params: { id: string } }) {
   }
 
   return (
-    <Card className="container max-w-4xl p-0 md:p-4 mx-auto overflow-hidden border-none shadow-lg">
+    <Card className="container max-w-4xl p-0 md:p-4 mx-auto overflow-hidden shadow-lg">
       <CardHeader className="space-y-2">
         <CardTitle className="text-2xl font-bold text-primary sm:text-3xl md:text-4xl">
           {repo.name}
