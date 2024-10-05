@@ -16,10 +16,16 @@ const MarkdownRenderer: React.FC<MarkdownRendererProps> = ({ markdown }) => {
     <ReactMarkdown
       components={{
         h1: ({ children }) => (
-          <h1 className="text-3xl font-bold mt-6 mb-2">{children}</h1>
+          <>
+            <h1 className="text-3xl font-bold mt-6 mb-2 border-b-2 pb-2 border-border">
+              {children}
+            </h1>
+          </>
         ),
         h2: ({ children }) => (
-          <h2 className="text-2xl font-semibold mt-5 mb-2">{children}</h2>
+          <h2 className="text-2xl font-semibold mt-5 mb-2 border-b-2 pb-2 border-border">
+            {children}
+          </h2>
         ),
         h3: ({ children }) => (
           <h3 className="text-xl font-semibold mt-4 mb-2">{children}</h3>
