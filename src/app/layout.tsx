@@ -21,6 +21,22 @@ const geistMono = localFont({
 export const metadata: Metadata = {
   title: "Misterkiewicz Aleksander - Portfolio",
   description: "A showcase of my projects and skills",
+  openGraph: {
+    title: "Misterkiewicz Aleksander - Portfolio",
+    description: "A showcase of my projects and skills",
+    url: "https://misterkiewicz-aleksander.vercel.app/",
+    siteName: "Misterkiewicz Portfolio",
+    images: [
+      {
+        url: "https://misterkiewicz-aleksander.vercel.app/social-thumbnail.webp",
+        width: 1200,
+        height: 630,
+        alt: "Aleksander Misterkiewicz - Portfolio",
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
 };
 
 export default function RootLayout({
