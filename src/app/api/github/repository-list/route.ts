@@ -17,6 +17,7 @@ interface LocalRepository {
   longDescription?: string;
   demoUrl?: string;
   technologies?: string[];
+  inDevelopment?: boolean;
 }
 
 interface LocalData {
@@ -32,6 +33,7 @@ interface MergedRepository {
   demoUrl: string;
   technologies: string[];
   createdAt: string | null;
+  inDevelopment?: boolean;
 }
 
 // Load Local Data
@@ -59,6 +61,7 @@ function mergeRepoData(
     demoUrl: localRepoData?.demoUrl || "",
     technologies: localRepoData?.technologies || [],
     createdAt: ghRepo.created_at,
+    inDevelopment: localRepoData?.inDevelopment || true,
   };
 }
 
