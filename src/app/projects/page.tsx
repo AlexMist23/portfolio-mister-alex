@@ -11,6 +11,7 @@ import {
   CardHeader,
   CardTitle,
   CardFooter,
+  CardContent,
 } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -29,6 +30,7 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel";
+import { cn } from "@/lib/utils";
 
 interface Repository {
   id: number;
@@ -39,6 +41,7 @@ interface Repository {
   technologies: string[];
   demoUrl?: string;
   createdAt: string;
+  inDevelopment: boolean;
 }
 interface SkillsAndTechnologies {
   languages: string[];
@@ -53,6 +56,91 @@ const skillsAndTechnologies: SkillsAndTechnologies = {
   databases: ["PostgreSQL"],
 };
 
+export function RepositoryCard({ repo }: { repo: Repository }) {
+  return (
+    <Card className="w-full overflow-hidden transition-shadow duration-300 group hover:shadow-lg hover:shadow-muted">
+      <div className="relative h-[330px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
+        <Carousel
+          opts={{ loop: true, align: "center" }}
+          className="h-full grid bg-muted"
+        >
+          <CarouselContent className="h-full">
+            {repo.images.map((img, i) => (
+              <CarouselItem
+                key={i}
+                className={cn(
+                  "h-full",
+                  repo.images.length > 2 ? "xl:basis-2/3" : ""
+                )}
+              >
+                <div className="relative w-full h-full">
+                  <Image
+                    src={`/images/repos/${img}`}
+                    alt={`${repo.name} - Image ${i + 1}`}
+                    layout="fill"
+                    objectFit="contain"
+                    className="transition-transform duration-300 ease-in-out transform hover:scale-105"
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                    priority={i === 0}
+                  />
+                </div>
+              </CarouselItem>
+            ))}
+          </CarouselContent>
+          <CarouselPrevious className="absolute z-10 left-4 top-1/2 -translate-y-1/2" />
+          <CarouselNext className="absolute z-10 right-4 top-1/2 -translate-y-1/2" />
+        </Carousel>
+      </div>
+
+      <CardContent className="p-6">
+        <CardHeader className="p-0 mb-4">
+          <div className="flex items-center justify-between">
+            <CardTitle className="text-2xl font-bold">{repo.name}</CardTitle>
+            {repo.inDevelopment && (
+              <Badge variant="secondary">In Development</Badge>
+            )}
+          </div>
+          <CardDescription className="mt-2 text-sm text-muted-foreground">
+            {repo.description || "No description"}
+          </CardDescription>
+        </CardHeader>
+        <div className="flex flex-wrap gap-2 mb-4">
+          {repo.technologies.map((tech) => (
+            <Badge key={tech} variant="outline">
+              {tech}
+            </Badge>
+          ))}
+        </div>
+        <div className="flex items-center mb-4 text-sm text-muted-foreground">
+          <CalendarIcon className="mr-2" />
+          Created on: {new Date(repo.createdAt).toLocaleDateString()}
+        </div>
+      </CardContent>
+
+      <CardFooter className="flex items-center justify-between p-6">
+        <div className="flex space-x-2">
+          <Button asChild size="sm" variant="outline">
+            <a href={repo.url} target="_blank" rel="noopener noreferrer">
+              <CodeIcon className="mr-2" />
+              Code
+            </a>
+          </Button>
+          {repo.demoUrl && (
+            <Button asChild size="sm" variant="outline">
+              <a href={repo.demoUrl} target="_blank" rel="noopener noreferrer">
+                <ExternalLinkIcon className="mr-2" />
+                Demo
+              </a>
+            </Button>
+          )}
+        </div>
+        <Button asChild size="sm">
+          <Link href={`/projects/${repo.id}`}>View Details</Link>
+        </Button>
+      </CardFooter>
+    </Card>
+  );
+}
 function RepositoriesList() {
   const [repositories, setRepositories] = useState<Repository[]>([]);
 
@@ -70,7 +158,7 @@ function RepositoriesList() {
   }, []);
 
   return (
-    <div className="space-y-8">
+    <div className="space-y-12">
       {repositories.map((repo, index) => (
         <motion.div
           key={repo.id}
@@ -78,83 +166,7 @@ function RepositoriesList() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: index * 0.1 }}
         >
-          <Card className="overflow-hidden transition-shadow duration-300 group hover:shadow-lg hover:shadow-muted">
-            <div className="md:flex">
-              <div className="relative h-72 md:h-auto md:w-1/3">
-                <Carousel opts={{ loop: true }} className="h-full">
-                  <CarouselContent className="h-full">
-                    {repo.images.map((img: string, i: number) => (
-                      <CarouselItem key={i} className="relative h-72 w-72">
-                        <Image
-                          src={`/images/repos/${img}`}
-                          alt={repo.name}
-                          layout="fill"
-                          objectFit="cover"
-                          className="transition-transform duration-300 ease-in-out transform hover:scale-105"
-                          priority
-                        />
-                      </CarouselItem>
-                    ))}
-                  </CarouselContent>
-                  <CarouselPrevious className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md left-4 top-1/2 bg-background" />
-                  <CarouselNext className="absolute z-10 p-2 transform -translate-y-1/2 rounded-full shadow-md right-4 top-1/2 bg-background" />
-                </Carousel>
-              </div>
-
-              <div className="flex flex-col justify-between p-6 md:w-2/3">
-                <div>
-                  <CardHeader className="p-0 mb-4">
-                    <CardTitle className="text-2xl font-bold">
-                      {repo.name}
-                    </CardTitle>
-                    <CardDescription className="mt-2 text-sm text-muted-foreground">
-                      {repo.description || "No description"}
-                    </CardDescription>
-                  </CardHeader>
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {repo.technologies.map((tech) => (
-                      <Badge key={tech} variant="secondary">
-                        {tech}
-                      </Badge>
-                    ))}
-                  </div>
-                  <div className="flex items-center mb-4 text-sm text-muted-foreground">
-                    <CalendarIcon className="mr-2" />
-                    Created on: {new Date(repo.createdAt).toLocaleDateString()}
-                  </div>
-                </div>
-                <CardFooter className="flex items-center justify-between p-0">
-                  <div className="flex space-x-2">
-                    <Button asChild size="sm" variant="outline">
-                      <a
-                        href={repo.url}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                      >
-                        <CodeIcon className="mr-2" />
-                        Code
-                      </a>
-                    </Button>
-                    {repo.demoUrl && (
-                      <Button asChild size="sm" variant="outline">
-                        <a
-                          href={repo.demoUrl}
-                          target="_blank"
-                          rel="noopener noreferrer"
-                        >
-                          <ExternalLinkIcon className="mr-2" />
-                          Demo
-                        </a>
-                      </Button>
-                    )}
-                  </div>
-                  <Button asChild size="sm">
-                    <Link href={`/projects/${repo.id}`}>View Details</Link>
-                  </Button>
-                </CardFooter>
-              </div>
-            </div>
-          </Card>
+          <RepositoryCard repo={repo} />
         </motion.div>
       ))}
     </div>
