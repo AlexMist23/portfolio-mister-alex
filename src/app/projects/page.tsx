@@ -75,7 +75,7 @@ function RepositoryCard({ repo }: { repo: Repository }) {
               >
                 <div className="relative w-full h-full">
                   <Image
-                    src={`/images/repos/${img}`}
+                    src={`${img}`}
                     alt={`${repo.name} - Image ${i + 1}`}
                     layout="fill"
                     objectFit="contain"
