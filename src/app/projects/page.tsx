@@ -56,7 +56,7 @@ const skillsAndTechnologies: SkillsAndTechnologies = {
   databases: ["PostgreSQL"],
 };
 
-export function RepositoryCard({ repo }: { repo: Repository }) {
+function RepositoryCard({ repo }: { repo: Repository }) {
   return (
     <Card className="w-full overflow-hidden transition-shadow duration-300 group hover:shadow-lg hover:shadow-muted">
       <div className="relative h-[330px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
