@@ -11,7 +11,8 @@
       "React",
       "Tailwind CSS",
       "REST API"
-    ]
+    ],
+    "demoUrl": "https://web-dev-toolkit-dun.vercel.app"
   },
   "portfolio-mister-alex": {
     "images": [
