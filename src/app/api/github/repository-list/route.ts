@@ -57,7 +57,11 @@ function mergeRepoData(
     name: ghRepo.name,
     description: ghRepo.description,
     url: ghRepo.html_url,
-    images: localRepoData?.images || ["default.webp"],
+    images: localRepoData?.images?.map(
+      (imgUrl) => "/images/repos/" + imgUrl
+    ) || [
+      `https://opengraph.githubassets.com/1/${process.env.GITHUB_USERNAME}/${ghRepo.name}`,
+    ],
     demoUrl: localRepoData?.demoUrl || "",
     technologies: localRepoData?.technologies || [],
     createdAt: ghRepo.created_at,
