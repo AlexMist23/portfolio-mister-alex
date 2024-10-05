@@ -1,4 +1,18 @@
 {
+  "web-dev-toolkit": {
+    "images": [
+      "web-dev-toolkit-1.webp",
+      "web-dev-toolkit-2.webp",
+      "web-dev-toolkit-3.webp"
+    ],
+    "technologies": [
+      "TypeScript",
+      "Next.js",
+      "React",
+      "Tailwind CSS",
+      "REST API"
+    ]
+  },
   "portfolio-mister-alex": {
     "images": [
       "portfolio-mister-alex-1.webp",
@@ -12,10 +26,11 @@
       "React",
       "Tailwind CSS",
       "REST API"
-    ]
+    ],
+    "inDevelopment": false
   },
   "ckziu-plan": {
-    "images": ["ckziu-plan-1.webp", "ckziu-plan-2.webp"],
+    "images": ["ckziu-plan-1.webp", "ckziu-plan-2.webp", "ckziu-plan-3.webp"],
     "demoUrl": "https://ckziu-plan.vercel.app",
     "technologies": [
       "TypeScript",
@@ -26,19 +41,16 @@
     ]
   },
   "weather-app": {
-    "images": ["weather-app.webp"],
+    "images": [
+      "weather-app-1.webp",
+      "weather-app-2.webp",
+      "weather-app-3.webp"
+    ],
     "demoUrl": "https://weather-appx.vercel.app/",
     "technologies": ["TypeScript", "Next.js", "React", "Shadcn UI", "REST API"]
   },
+
   "django_cinema_app": {
-    "technologies": [
-      "Python",
-      "Django",
-      "SQL",
-      "PostgreSQL",
-      "HTML",
-      "CSS",
-      "JavaScript"
-    ]
+    "technologies": ["Python", "Django", "PostgreSQL", "JavaScript"]
   }
 }
