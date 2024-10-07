@@ -48,11 +48,13 @@
       "weather-app-3.webp"
     ],
     "demoUrl": "https://weather-appx.vercel.app/",
+    "inDevelopment": false,
     "technologies": ["TypeScript", "Next.js", "React", "Shadcn UI", "REST API"]
   },
 
   "django_cinema_app": {
-    "technologies": ["Python", "Django", "PostgreSQL", "JavaScript"]
+    "technologies": ["Python", "Django", "PostgreSQL", "JavaScript"],
+    "inDevelopment": false
   },
   "weather-app-2-api-met-no": {
     "images": [
