@@ -59,7 +59,7 @@ const skillsAndTechnologies: SkillsAndTechnologies = {
 function RepositoryCard({ repo }: { repo: Repository }) {
   return (
     <Card className="w-full overflow-hidden transition-shadow duration-300 group hover:shadow-lg hover:shadow-muted">
-      <div className="relative h-[330px] sm:h-[400px] md:h-[450px] lg:h-[500px]">
+      <div className="relative max-h-fit border-b-2">
         <Carousel
           opts={{ loop: true, align: "center" }}
           className="h-full grid bg-muted"
@@ -69,21 +69,19 @@ function RepositoryCard({ repo }: { repo: Repository }) {
               <CarouselItem
                 key={i}
                 className={cn(
-                  "h-full",
+                  "h-full flex justify-center items-center",
                   repo.images.length > 2 ? "xl:basis-2/3" : ""
                 )}
               >
-                <div className="relative w-full h-full">
-                  <Image
-                    src={`${img}`}
-                    alt={`${repo.name} - Image ${i + 1}`}
-                    layout="fill"
-                    objectFit="contain"
-                    className="transition-transform duration-300 ease-in-out transform hover:scale-105"
-                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
-                    priority={i === 0}
-                  />
-                </div>
+                <Image
+                  src={`${img}`}
+                  alt={`${repo.name} - Image ${i + 1}`}
+                  width={880}
+                  height={240}
+                  className="transition-transform duration-300 ease-in-out transform hover:scale-105 rounded-lg shadow-lg shadow-foreground/20 md:m-4"
+                  sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
+                  priority={i === 0}
+                />
               </CarouselItem>
             ))}
           </CarouselContent>
