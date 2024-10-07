@@ -53,5 +53,14 @@
 
   "django_cinema_app": {
     "technologies": ["Python", "Django", "PostgreSQL", "JavaScript"]
+  },
+  "weather-app-2-api-met-no": {
+    "images": [
+      "weather-app-2-api-met-no-1.webp",
+      "weather-app-2-api-met-no-2.webp",
+      "weather-app-2-api-met-no-3.webp"
+    ],
+    "demoUrl": "https://weather-app-2-api-met-no.vercel.app/",
+    "technologies": ["TypeScript", "Next.js", "React", "REST API"]
   }
 }
