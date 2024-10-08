@@ -231,7 +231,7 @@ export default function ProjectsPage() {
           className="flex flex-col md:flex-row gap-6 items-center"
         >
           <div>
-            <Avatar className=" w-60 h-60 shadow-md md:mb-0 md:mr-8 shadow-muted ">
+            <Avatar className="mx-auto w-1/3 h-1/3 md:w-60 md:h-60 shadow-md md:mb-0 md:mr-8 shadow-muted ">
               <AvatarImage
                 src="/images/am-main-img.webp"
                 alt="Aleksander Misterkiewicz"
