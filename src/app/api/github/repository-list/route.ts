@@ -79,7 +79,7 @@ export async function GET() {
     const response = await octokit.repos.listForAuthenticatedUser({
       sort: "created",
       direction: "desc",
-      per_page: 100,
+      per_page: 10,
     });
 
     const repositories = response.data
